@@ -2,6 +2,7 @@ package com.example.administrator.componentsdemo;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.common_module.BaseApplication;
+import com.example.common_module.BuildConfig;
 
 public class App extends BaseApplication {
     @Override
