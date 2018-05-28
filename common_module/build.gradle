@@ -1,7 +1,15 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-kapt'
+//
+//kapt {
+//    arguments {
+//        arg("moduleName", project.getName())
+//    }
+//}
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    compileSdkVersion 27
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -9,29 +17,32 @@ android {
         versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [moduleName: project.getName()]
+//            }
+//        }
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    buildToolsVersion '27.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     api rootProject.ext.dependencies.appcompat_v7
     api rootProject.ext.dependencies.kotlin
     api rootProject.ext.dependencies.constraint_layout
     api rootProject.ext.dependencies.arouter_api
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.1'
+//    kapt 'com.alibaba:arouter-compiler:1.1.1'
     //noinspection GradleCompatible
     testImplementation 'junit:junit:4.12'
     //noinspection GradleCompatible

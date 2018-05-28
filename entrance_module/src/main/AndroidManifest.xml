@@ -4,7 +4,6 @@
 
     <application>
         <activity android:name=".EntranceActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
