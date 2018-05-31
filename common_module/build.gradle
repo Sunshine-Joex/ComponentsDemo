@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-kapt'
 //
 //kapt {
 //    arguments {
@@ -9,6 +9,14 @@ apply plugin: 'kotlin-android-extensions'
 //    }
 //}
 android {
+    signingConfigs {
+        release {
+            keyAlias 'kaishizu'
+            keyPassword '123'
+            storeFile file('F:/梓轩投资管理/key/zixuan_android.jks')
+            storePassword '123'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -25,14 +33,26 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            buildConfigField "String", "BASEURL", "\"http://api.room.kaishizu.cn/\""
+
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            buildConfigField "String", "BASEURL", "\"http://gank.io/api/data/\""
+
+            signingConfig signingConfigs.debug
         }
     }
     buildToolsVersion '27.0.3'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding{
+        enabled=true
     }
 }
 
@@ -42,10 +62,20 @@ dependencies {
     api rootProject.ext.dependencies.kotlin
     api rootProject.ext.dependencies.constraint_layout
     api rootProject.ext.dependencies.arouter_api
-//    kapt 'com.alibaba:arouter-compiler:1.1.1'
+
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.converter_gson
+    api rootProject.ext.dependencies.adapter_rxjava2
+    api rootProject.ext.dependencies.gson
+    api rootProject.ext.dependencies.rxkotlin
+    api rootProject.ext.dependencies.rxandroid
+    //    kapt 'com.alibaba:arouter-compiler:1.1.1'
     //noinspection GradleCompatible
     testImplementation 'junit:junit:4.12'
     //noinspection GradleCompatible
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    kapt 'com.android.databinding:compiler:3.1.0'
+
+
 }

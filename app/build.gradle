@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -13,11 +13,11 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [moduleName: project.getName()]
+//            }
+//        }
     }
     buildTypes {
         release {
@@ -29,6 +29,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding{
+        enabled=true
     }
 }
 
@@ -44,5 +47,6 @@ dependencies {
         implementation project(':entrance_module')
         implementation project(':main_module')
     }
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.1'
+    kapt 'com.android.databinding:compiler:3.1.0'
+//    annotationProcessor 'com.alibaba:arouter-compiler:1.1.1'
 }
