@@ -1,1 +1,1 @@
-include ':app', ':common_module', ':entrance_module', ':main_module'
+include ':app', ':common_module', ':entrance_module', ':main_module', ':chat_module'

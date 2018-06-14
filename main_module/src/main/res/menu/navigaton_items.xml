@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_chats"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/chats" />
+    <item
+        android:id="@+id/action_contacts"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/contacts" />
+    <item
+        android:id="@+id/action_discover"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/discover" />
+    <item
+        android:id="@+id/action_game"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/game" />
+    <item
+        android:id="@+id/action_me"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/me"
+
+        />
+
+</menu>

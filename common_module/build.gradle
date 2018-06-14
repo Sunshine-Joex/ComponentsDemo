@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 //
-//kapt {
-//    arguments {
-//        arg("moduleName", project.getName())
-//    }
-//}
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
 android {
     signingConfigs {
         release {
@@ -17,7 +17,7 @@ android {
             storePassword '123'
         }
     }
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -37,7 +37,6 @@ android {
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
         debug {
             buildConfigField "String", "BASEURL", "\"http://gank.io/api/data/\""
@@ -50,9 +49,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    dataBinding{
-        enabled=true
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -60,22 +58,21 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api rootProject.ext.dependencies.appcompat_v7
     api rootProject.ext.dependencies.kotlin
-    api rootProject.ext.dependencies.constraint_layout
     api rootProject.ext.dependencies.arouter_api
-
     api rootProject.ext.dependencies.retrofit
     api rootProject.ext.dependencies.converter_gson
     api rootProject.ext.dependencies.adapter_rxjava2
     api rootProject.ext.dependencies.gson
     api rootProject.ext.dependencies.rxkotlin
     api rootProject.ext.dependencies.rxandroid
+    api rootProject.ext.dependencies.design
+    api rootProject.ext.dependencies.support_v4
     //    kapt 'com.alibaba:arouter-compiler:1.1.1'
     //noinspection GradleCompatible
     testImplementation 'junit:junit:4.12'
     //noinspection GradleCompatible
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    kapt 'com.alibaba:arouter-compiler:1.1.1'
     kapt 'com.android.databinding:compiler:3.1.0'
-
-
 }

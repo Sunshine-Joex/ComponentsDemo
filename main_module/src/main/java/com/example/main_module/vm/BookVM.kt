@@ -1,12 +1,12 @@
 package com.example.main_module.vm
 
 import android.databinding.ObservableField
+import com.example.common_module.base.BaseBean
+import com.example.common_module.net.SubscribeObserable
 import com.example.main_module.bean.TelBean
-import com.example.main_module.m.TaskRepository
+import com.example.main_module.m.Task
 
-class BookVM : TaskRepository.TaskCallBack {
-
-
+class BookVM : SubscribeObserable.TaskCallBack<List<TelBean>> {
 
     var id: ObservableField<String> = ObservableField()
     var createdAt: ObservableField<String> = ObservableField()
@@ -18,14 +18,15 @@ class BookVM : TaskRepository.TaskCallBack {
     var used: ObservableField<String> = ObservableField()
     var who: ObservableField<String> = ObservableField()
 
-    var taskRepository: TaskRepository = TaskRepository()
+    var task: Task = Task()
 
 
     fun start() {
-        taskRepository.execute(this)
+        task.execute(this)
     }
 
-    override fun onTaskLoaded(bean: TelBean) {
+    override fun onTaskLoaded(model: BaseBean<List<TelBean>>) {
+        var bean: TelBean = model.results.get(0)
         id.set(bean._id)
         createdAt.set(bean.createdAt)
         desc.set(bean.desc)

@@ -3,9 +3,9 @@
     package="com.example.main_module">
 
     <application>
-        <activity android:name=".HomeActivity" >
+        <activity android:name=".v.MainActivity" >
         </activity>
-        <activity android:name=".DetialActivity"></activity>
+        <activity android:name=".v.DetialActivity"></activity>
     </application>
 
 </manifest>

@@ -32,7 +32,7 @@ object RetrofitClient {
                 .build()
     }
 
-    fun <T> create(service: Class<T>): T {
+    fun <T> createService(service: Class<T>): T {
         if (service == null) {
             throw RuntimeException("Api service is null!")
         }

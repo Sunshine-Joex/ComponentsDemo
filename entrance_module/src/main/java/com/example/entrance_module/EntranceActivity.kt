@@ -11,7 +11,7 @@ class EntranceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entrance)
         button.setOnClickListener {
-            ARouter.getInstance().build("/main/HomeActivity").navigation()
+            ARouter.getInstance().build("/main/MainActivity").navigation()
 
         }
     }

@@ -14,7 +14,15 @@ kapt {
 }
 
 android {
-    compileSdkVersion 27
+    signingConfigs {
+        release {
+            keyAlias 'kaishizu'
+            keyPassword '123'
+            storeFile file('F:/梓轩投资管理/key/zixuan_android.jks')
+            storePassword '123'
+        }
+    }
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -22,7 +30,6 @@ android {
         versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
 
 //        javaCompileOptions {
 //            annotationProcessorOptions {
@@ -61,14 +68,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
     //noinspection GradleCompatible
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':common_module')
-    kapt  'com.alibaba:arouter-compiler:1.1.1'
+    kapt 'com.alibaba:arouter-compiler:1.1.1'
     kapt 'com.android.databinding:compiler:3.1.0'
 }
-
-

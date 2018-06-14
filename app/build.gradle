@@ -5,7 +5,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
-    compileSdkVersion 27
+    signingConfigs {
+        release {
+            keyAlias 'kaishizu'
+            keyPassword '123'
+            storeFile file('F:/梓轩投资管理/key/zixuan_android.jks')
+            storePassword '123'
+        }
+    }
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         applicationId "com.example.administrator.componentsdemo"
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -30,8 +38,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dataBinding{
-        enabled=true
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -46,7 +54,8 @@ dependencies {
     if (!isModule.toBoolean()) {
         implementation project(':entrance_module')
         implementation project(':main_module')
+        implementation project(':chat_module')
     }
     kapt 'com.android.databinding:compiler:3.1.0'
-//    annotationProcessor 'com.alibaba:arouter-compiler:1.1.1'
+    //    annotationProcessor 'com.alibaba:arouter-compiler:1.1.1'
 }
