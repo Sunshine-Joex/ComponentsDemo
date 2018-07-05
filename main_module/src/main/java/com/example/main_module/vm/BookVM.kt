@@ -1,27 +1,46 @@
 package com.example.main_module.vm
 
+import android.content.Context
+import android.databinding.BindingAdapter
+import android.databinding.ObservableArrayList
+import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.Toast
 import com.example.common_module.base.BaseBean
 import com.example.common_module.net.SubscribeObserable
+import com.example.main_module.TestAdapter
+import com.example.main_module.bean.GithubBean
 import com.example.main_module.bean.TelBean
 import com.example.main_module.m.Task
 
-class BookVM : SubscribeObserable.TaskCallBack<List<TelBean>> {
+class BookVM(context: Context) : SubscribeObserable.TaskCallBack<List<TelBean>> {
+    var isLoding = ObservableBoolean(false)
+    var isRefresh = ObservableBoolean(false)
+    var id = ObservableField<String>()
+    var createdAt = ObservableField<String>()
+    var desc = ObservableField<String>()
+    var publishedAt = ObservableField<String>()
+    var source = ObservableField<String>()
+    var type = ObservableField<String>()
+    var url = ObservableField<String>()
+    var used = ObservableField<String>()
+    var who = ObservableField<String>()
+    var context: Context? = null
 
-    var id: ObservableField<String> = ObservableField()
-    var createdAt: ObservableField<String> = ObservableField()
-    var desc: ObservableField<String> = ObservableField()
-    var publishedAt: ObservableField<String> = ObservableField()
-    var source: ObservableField<String> = ObservableField()
-    var type: ObservableField<String> = ObservableField()
-    var url: ObservableField<String> = ObservableField()
-    var used: ObservableField<String> = ObservableField()
-    var who: ObservableField<String> = ObservableField()
+
+    var list: ObservableArrayList<GithubBean> = ObservableArrayList()
 
     var task: Task = Task()
 
 
     fun start() {
+        isRefresh.set(true)
+        isLoding.set(true)
+
         task.execute(this)
     }
 
@@ -37,9 +56,46 @@ class BookVM : SubscribeObserable.TaskCallBack<List<TelBean>> {
         used.set(bean.used)
         who.set(bean.who)
 
+        Thread({
+            Thread.sleep(3000L)
+            if (isRefresh.get() && list.size > 0) {//判断是不是刷新操作
+                list.clear()
+            }
+            for (item in model.results) {
+
+                list.add(GithubBean(item.who))
+            }
+            isLoding.set(false)
+            isRefresh.set(false)
+        }).start()
+
+
     }
 
-    override fun onDataNotAvailable(e: Throwable) {
+    fun onRefresh() {
+
+        isRefresh.set(true)
+        task.execute(this)
+
+
     }
+
+    fun click(view: View) {
+        Toast.makeText(view.context, "clickListener", Toast.LENGTH_SHORT).show()
+    }
+
+    fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+        var lastVisibleItemPosition = (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+        if (lastVisibleItemPosition + 1 == recyclerView.adapter.itemCount) {
+            Toast.makeText(recyclerView.context, "loadMore", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    override fun onDataNotAvailable(e: Throwable) {
+
+    }
+
 
 }

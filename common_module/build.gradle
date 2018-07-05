@@ -17,7 +17,7 @@ android {
             storePassword '123'
         }
     }
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    compileSdkVersion 27
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -67,6 +67,7 @@ dependencies {
     api rootProject.ext.dependencies.rxandroid
     api rootProject.ext.dependencies.design
     api rootProject.ext.dependencies.support_v4
+//    api rootProject.ext.dependencies.SmartRefreshLayout
     //    kapt 'com.alibaba:arouter-compiler:1.1.1'
     //noinspection GradleCompatible
     testImplementation 'junit:junit:4.12'

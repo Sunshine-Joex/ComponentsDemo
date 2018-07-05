@@ -26,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-//@Route(path = RouteUtils.CHAT_FRAGMENT)
+@Route(path = RouteUtils.CHAT_FRAGMENT)
 class ChatFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

@@ -22,7 +22,7 @@ android {
             storePassword '123'
         }
     }
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    compileSdkVersion 27
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion

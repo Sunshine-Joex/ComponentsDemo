@@ -1,78 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="bookVM"
-            type="com.example.main_module.vm.BookVM"/>
+            type="com.example.main_module.vm.BookVM" />
     </data>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".v.DetialActivity"
-    android:orientation="vertical">
-<TextView
-    android:id="@+id/tv1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@={bookVM.id}"
-    android:layout_marginBottom="20dp"/>
 
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@={bookVM.createdAt}" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".v.DetialActivity">
 
-    <TextView
-        android:id="@+id/tv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@={bookVM.desc}" />
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:onRefreshListener="@{() -> bookVM.onRefresh()}"
+            app:refreshing="@{bookVM.isRefresh}">
 
-    <TextView
-        android:id="@+id/tv4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@={bookVM.publishedAt}" />
 
-    <TextView
-        android:id="@+id/tv5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@={bookVM.source}" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:data="@{bookVM.list}"
+                app:loadmore="@{(recyclerView,dx,dy) -> bookVM.onScrolled() }"
+               />
 
-    <TextView
-        android:id="@+id/tv6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@={bookVM.type}" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-    <TextView
-        android:id="@+id/tv7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@={bookVM.url}" />
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@={bookVM.id}" />
 
-    <TextView
-        android:id="@+id/tv8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@={bookVM.used}" />
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@={bookVM.createdAt}" />
 
-    <TextView
-        android:id="@+id/tv9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@={bookVM.who}" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@={bookVM.desc}" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@={bookVM.publishedAt}" />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@={bookVM.source}" />
+
+        <TextView
+            android:id="@+id/tv6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@={bookVM.type}" />
+
+        <TextView
+            android:id="@+id/tv7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@={bookVM.url}" />
+
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@={bookVM.used}" />
+
+        <TextView
+            android:id="@+id/tv9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:onClick="@{bookVM::click}"
+            android:text="@={bookVM.who}" />
+
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:visibility="@{bookVM.isLoding? View.VISIBLE : View.GONE}" />
+    </LinearLayout>
 </layout>
