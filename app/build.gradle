@@ -61,7 +61,7 @@ dependencies {
         implementation project(':main_module')
         implementation project(':chat_module')
     }
-    kapt 'com.alibaba:arouter-compiler:1.1.1'
+    kapt 'com.alibaba:arouter-compiler:1.1.4'
     kapt 'com.android.databinding:compiler:3.1.0'
     //    annotationProcessor 'com.alibaba:arouter-compiler:1.1.1'
 }

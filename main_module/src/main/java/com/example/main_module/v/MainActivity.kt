@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        chatsFragment = RouteUtils.routerFragment(RouteUtils.CHAT_FRAGMENT)
+        chatsFragment = RouteUtils.routerFragment(RouteUtils.CHAT_FRAGMENT)
 
         when (item.itemId) {
-//            R.id.action_chats -> supportFragmentManager.beginTransaction().replace(R.id.content, chatsFragment).commit()
+            R.id.action_chats -> supportFragmentManager.beginTransaction().replace(R.id.content, chatsFragment).commit()
             R.id.action_contacts -> supportFragmentManager.beginTransaction().replace(R.id.content, contactsFragment).commit()
             R.id.action_discover -> supportFragmentManager.beginTransaction().replace(R.id.content, discoverFragment).commit()
             R.id.action_game -> supportFragmentManager.beginTransaction().replace(R.id.content, gameFragment).commit()

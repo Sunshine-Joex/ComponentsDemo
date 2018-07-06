@@ -31,7 +31,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:data="@{bookVM.list}"
-                app:loadmore="@{(recyclerView,dx,dy) -> bookVM.onScrolled() }"
                />
 
         </android.support.v4.widget.SwipeRefreshLayout>

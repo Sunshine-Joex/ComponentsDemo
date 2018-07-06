@@ -84,13 +84,6 @@ class BookVM(context: Context) : SubscribeObserable.TaskCallBack<List<TelBean>> 
         Toast.makeText(view.context, "clickListener", Toast.LENGTH_SHORT).show()
     }
 
-    fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-
-        var lastVisibleItemPosition = (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-        if (lastVisibleItemPosition + 1 == recyclerView.adapter.itemCount) {
-            Toast.makeText(recyclerView.context, "loadMore", Toast.LENGTH_SHORT).show()
-        }
-    }
 
 
     override fun onDataNotAvailable(e: Throwable) {
