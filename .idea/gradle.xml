@@ -11,8 +11,10 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/chat_module" />
             <option value="$PROJECT_DIR$/common_module" />
+            <option value="$PROJECT_DIR$/contact_module" />
             <option value="$PROJECT_DIR$/entrance_module" />
             <option value="$PROJECT_DIR$/main_module" />
+            <option value="$PROJECT_DIR$/mine_module" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -13,14 +13,12 @@ import com.example.main_module.R
 import com.example.main_module.utils.BottomNavigationViewHelper
 import kotlinx.android.synthetic.main.activity_home.*
 
-@Route(path = "/main/MainActivity")
+@Route(path = RouteUtils.MAIN_ACTIVITY)
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     var chatsFragment: Fragment? = null
-    var contactsFragment: ContactsFragment = ContactsFragment()
-    var discoverFragment: DiscoverFragment = DiscoverFragment()
-    var gameFragment: GameFragment = GameFragment()
-    var meFragment: MeFragment = MeFragment()
+    var contactsFragment: Fragment ?=null
+    var meFragment: Fragment?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +33,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         chatsFragment = RouteUtils.routerFragment(RouteUtils.CHAT_FRAGMENT)
+        contactsFragment = RouteUtils.routerFragment(RouteUtils.CONTACT_FRAGMENT)
+        meFragment = RouteUtils.routerFragment(RouteUtils.MINE_FRAGMENT)
 
         when (item.itemId) {
             R.id.action_chats -> supportFragmentManager.beginTransaction().replace(R.id.content, chatsFragment).commit()
             R.id.action_contacts -> supportFragmentManager.beginTransaction().replace(R.id.content, contactsFragment).commit()
-            R.id.action_discover -> supportFragmentManager.beginTransaction().replace(R.id.content, discoverFragment).commit()
-            R.id.action_game -> supportFragmentManager.beginTransaction().replace(R.id.content, gameFragment).commit()
             R.id.action_me -> supportFragmentManager.beginTransaction().replace(R.id.content, meFragment).commit()
 
         }

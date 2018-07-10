@@ -10,14 +10,6 @@
         android:icon="@drawable/ic_action_name"
         android:title="@string/contacts" />
     <item
-        android:id="@+id/action_discover"
-        android:icon="@drawable/ic_action_name"
-        android:title="@string/discover" />
-    <item
-        android:id="@+id/action_game"
-        android:icon="@drawable/ic_action_name"
-        android:title="@string/game" />
-    <item
         android:id="@+id/action_me"
         android:icon="@drawable/ic_action_name"
         android:title="@string/me"
